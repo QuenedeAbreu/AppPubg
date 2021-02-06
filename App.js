@@ -38,30 +38,55 @@ const ViewOption = styled.View`
   height: 60px;
   background-color: #000;
   border-radius: 10px;
-  margin-top: 20px;
+  margin: 20px 0px 30px 0px;
 `;
 
 const Select = styled.Picker`
-  height: 60px;
   width: 300px;
+  height: 60px;
   color: #ffd600;
-  border: solid 10px #fff;
+`;
+const ResulSelect = styled.Text`
+  color: #ffd600;
+  font-size: 16px;
+  margin-top: 10px;
 `;
 
 const Logo = styled.Image`
   width: 70px;
   height: 50px;
 `;
+const ImgBody = styled.Image`
+  width: 242px;
+  height: 263px;
+`;
+
+const InputNome = styled.TextInput`
+  width: 300px;
+  height: 60px;
+  border-bottom-width: 1px;
+  border-bottom-color: #ffd600;
+  color: #ffd600;
+`;
+
+const ResultText = (props) => {
+  var result = '';
+  if (props.vai) {
+    result = <ResulSelect>Item Selecionando - {props.vai}</ResulSelect>;
+  } else {
+    result = <ResulSelect />;
+  }
+  return result;
+};
 
 const Options = () => {
   // eslint-disable-next-line no-sparse-arrays
   const currencies = [
     {country: '', currency: '', currencyLabel: 'Selecione uma opcao '},
     {country: 'UK', currency: 'GBP', currencyLabel: 'Pound '},
-    {country: 'Udasdsd', currency: 'GBdasdas', currencyLabel: 'dasdasdasd '},
+    {country: 'Udasdasd', currency: 'GBdasdas', currencyLabel: 'dasdasdasd '},
     ,
   ];
-
   const [selectedValue, setSelectedValue] = useState('');
   return (
     <ViewOption>
@@ -73,7 +98,7 @@ const Options = () => {
           return <Picker.Item label={v.currencyLabel} value={v.country} />;
         })}
       </Select>
-      <Text>Item Selecionando - {selectedValue}</Text>
+      <ResultText vai={selectedValue} />
     </ViewOption>
   );
 };
@@ -87,6 +112,8 @@ export default function App() {
       </Header>
 
       <Content>
+        <ImgBody source={require('./src/img/pubg.png')} />
+        <InputNome placeholder="Nome" placeholderTextColor="#ffd600" />
         <Options />
       </Content>
 
