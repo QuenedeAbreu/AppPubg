@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
 const Page = styled.SafeAreaView`
@@ -35,14 +35,24 @@ const Footer = styled.View`
 
 const ViewOption = styled.View`
   width: 300px;
+  height: 150px;
+  margin: 10px 0px 0px 0px;
+  padding: 10px;
+  border-width: 1px;
+  border-color: #ffd600;
+  border-radius: 10px;
+`;
+
+const OptionsIn = styled.View`
+  width: 280px;
   height: 60px;
   background-color: #000;
   border-radius: 10px;
-  margin: 20px 0px 30px 0px;
+  margin: 10px 0px 0px 0px;
 `;
 
 const Select = styled.Picker`
-  width: 300px;
+  width: 100%;
   height: 60px;
   color: #ffd600;
 `;
@@ -50,6 +60,10 @@ const ResulSelect = styled.Text`
   color: #ffd600;
   font-size: 16px;
   margin-top: 10px;
+`;
+const TextOption = styled.Text`
+  font-size: 18px;
+  color: #ffd600;
 `;
 
 const Logo = styled.Image`
@@ -69,6 +83,23 @@ const InputNome = styled.TextInput`
   color: #ffd600;
 `;
 
+const ButtonConfirm = styled.TouchableOpacity`
+  width: 300px;
+  align-items: center;
+  background-color: #000;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: #ffffff;
+`;
+const ViewButton = styled.View`
+  width: 300px;
+  align-items: center;
+  padding: 10px;
+`;
+const TextButton = styled.Text`
+  color: #ffffff;
+`;
 const ResultText = (props) => {
   var result = '';
   if (props.vai) {
@@ -90,15 +121,18 @@ const Options = () => {
   const [selectedValue, setSelectedValue] = useState('');
   return (
     <ViewOption>
-      <Select
-        selectedValue={selectedValue}
-        //style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-        {currencies.map((v) => {
-          return <Picker.Item label={v.currencyLabel} value={v.country} />;
-        })}
-      </Select>
-      <ResultText vai={selectedValue} />
+      <TextOption>Escolha</TextOption>
+      <OptionsIn>
+        <Select
+          selectedValue={selectedValue}
+          //style={styles.picker}
+          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+          {currencies.map((v) => {
+            return <Picker.Item label={v.currencyLabel} value={v.country} />;
+          })}
+        </Select>
+        <ResultText vai={selectedValue} />
+      </OptionsIn>
     </ViewOption>
   );
 };
@@ -114,7 +148,17 @@ export default function App() {
       <Content>
         <ImgBody source={require('./src/img/pubg.png')} />
         <InputNome placeholder="Nome" placeholderTextColor="#ffd600" />
+
         <Options />
+
+        <ButtonConfirm
+          onPress={() => {
+            alert('Quenede abreu');
+          }}>
+          <ViewButton>
+            <TextButton>Agendar</TextButton>
+          </ViewButton>
+        </ButtonConfirm>
       </Content>
 
       <Footer />
